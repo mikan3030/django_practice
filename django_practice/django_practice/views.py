@@ -1,4 +1,10 @@
-from django.http import Httpresponse
+from django.http import HttpResponse
 
 def index(request):
-    return Httpresponse("Hello World")
+    return HttpResponse("Hello World")
+
+def hoge(request):
+    return HttpResponse("Hoge")
+
+def fuga(request):
+    return HttpResponse("fuga")
