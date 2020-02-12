@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 def index(request):
     return render(request,"index.html",
-    {"title":"Hello World"})
+    {"title":"Hllo World"})
 
 def hoge(request):
     if request.method == "POST":
@@ -13,5 +13,5 @@ def hoge(request):
     else:
         return HttpResponse("Foo")
 
-def fuga(request):
-    return HttpResponse("fuga")
+def fuga(request,foo):
+    return render(request,"fuga.html",{'title': foo})
