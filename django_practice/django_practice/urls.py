@@ -22,7 +22,8 @@ urlpatterns = [
     path('hoge/',include("hoge.urls")),
     path('fuga/<foo>',views.fuga),
     path("search",views.search),
-    path("form",views.render_form),
+    path("form",views.form),
+    path("upload",views.upload),
     path("login",views.login),
     path("admin/",admin.site.urls)
 ]
