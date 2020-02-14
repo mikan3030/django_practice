@@ -45,6 +45,35 @@
         class="img-thumbnail" width="200" height="200">
     </div>
     </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">タイトル</th>
+          <th scope="col">説明</th>
+          <th scope="col">フィードのURL</th>
+          <th scope="col">削除</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for feed in feeds %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{feed.title}}</td>
+          <td>{{feed.description}}</td>
+          <td>{{feed.href}}</td>
+          <td>
+            <form action="/delete" method="POST">
+              {%csrf_token%}
+              <input name="id" type="hidden" value="{{feed.id}}">
+              <button type="submit">削除</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

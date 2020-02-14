@@ -4,7 +4,26 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        <h1>アップロードされた画像</h1>
-        <img src="static/hoge.png" style="max-width: width 320px">
+        <table class="table">
+            <thead>
+                <tr scope="col"></tr>
+                <tr scope="col">タイトル</tr>
+                <tr scope="col">説明</tr>
+                <tr scope="col">フィードのURL</tr>
+            </thead>
+            <tbody>
+                {% for feed in feeds %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{feed.title}}</td>
+                    <td>{{feed.description}}</td>
+                    <td>{{feed.href}}</td>
+                </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+
+        <!-- <h1>アップロードされた画像</h1>
+        <img src="static/hoge.png" style="max-width: width 320px"> -->
     </body>
 </html>

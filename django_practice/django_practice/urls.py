@@ -25,5 +25,9 @@ urlpatterns = [
     path("form",views.form),
     path("upload",views.upload),
     path("login",views.login),
+    path("post",views.post),
+    path("search",views.search),
+    path("delete",views.delete),
+    path("change_title",views.change_title),
     path("admin/",admin.site.urls)
 ]
