@@ -29,5 +29,9 @@ urlpatterns = [
     path("search",views.search),
     path("delete",views.delete),
     path("change_title",views.change_title),
+    path("page_form",views.page_form), 
+    path("page_post",views.page_post),
+    path("page_list",views.page_list),
+    # path("{"id"}/pages",views.page_post),
     path("admin/",admin.site.urls)
 ]
