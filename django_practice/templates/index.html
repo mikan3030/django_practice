@@ -54,6 +54,8 @@
           <th scope="col">説明</th>
           <th scope="col">フィードのURL</th>
           <th scope="col">削除</th>
+          <th scope="col">追加</th>
+          <th scope="col">ページ一覧</th>
         </tr>
       </thead>
       <tbody>
@@ -69,6 +71,16 @@
               <input name="id" type="hidden" value="{{feed.id}}">
               <button type="submit">削除</button>
             </form>
+          </td>
+          <td>
+            <a href="/page_form?id={{feed.id}}">
+              ページを追加
+            </a>
+          </td>
+          <td>
+            <a href="/page_list?id={{feed.id}}">
+              ページを追加
+            </a>
           </td>
         </tr>
         {% endfor %} 

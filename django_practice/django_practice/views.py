@@ -2,7 +2,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .models import Page
 from .models import Feed
-from .forms import FeedForm
+from .forms import FeedForm,PageForm
 
 def index(request):
     feeds = Feed.objects.all()
@@ -90,3 +90,28 @@ def delete(request):
         feed = Feed.objects.get(id=request.POST["id"])
         feed.delete()
         return redirect(to="/")
+
+def page_post(request):
+    if (request.method=="POST"
+        and request.POST["title"]
+        and request.POST["href"]
+        and request.POST["description"]):
+        feed = Feed.objects.get(id=request.POST["id"])
+        page = Page.objects.create(
+            title = request.POST["title"],
+            href = request.POST["href"],
+            description = request.POST["description"],
+            feed = feed
+        )
+        page.save()
+        return redirect(to="/")
+
+def page_form(request):
+    form = PageForm({"id":request.GET["id"]})
+    return render(request,"page_form.html",{"form":form})
+
+def page_list(request):
+    pages = Page.objects.filter(feed__id = request.GET["id"])
+    # print(pages.feed.id=)
+    return render(request,"page_list.html",
+    {"pages":pages})
