@@ -1,9 +1,14 @@
 from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .models import Page
+from .models import Feed
+from .forms import FeedForm
 
 def index(request):
+    feeds = Feed.objects.all()
     return render(request,"index.html",
-    {"title":"Hllo World","l":["ok","kusa","nashi"]})
+    {"title":"Hllo World","l":["ok","kusa","nashi"]
+    ,"feeds":feeds})
 
 def hoge(request):
     if request.method == "POST":
@@ -43,4 +48,45 @@ def upload(request):
         return render(request,"form.html")
 
 def form(request):
-    return render(request,"form.html")
+    form = FeedForm()
+    return render(request,"form.html"
+    ,{"form":form})
+
+def post(request):
+    if request.method != "POST":
+        return redirect(to="/form")
+    form = FeedForm(request.POST)
+    if (form.is_valid()):
+        feed = Feed.objects.create(
+            title = request.POST["title"],
+            href = request.POST["href"],
+            description = request.POST["description"]
+        )
+        feed.save()
+        return redirect(to="/")
+    else:
+        return redirect(to="/form")
+
+def search(request):
+    try:
+        feed = Feed.objects.get(title=request.GET["q"])
+        return render(request,"result.html",
+        {"feeds":[feed]})
+    except:
+        return render(request,"result.html",
+        {"feeds":[]})
+
+def change_title(request):
+    feed = Feed.objects.get(id=request.POST["id"])
+    # feed.title = request.POST["title"]
+    feed.title = kusa
+    feed.save()
+    return render(request,"result.html",
+    {"feed":[feed]})
+
+def delete(request):
+    if (request.method == "POST" 
+    and request.POST["id"]):
+        feed = Feed.objects.get(id=request.POST["id"])
+        feed.delete()
+        return redirect(to="/")

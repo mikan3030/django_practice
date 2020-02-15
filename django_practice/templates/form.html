@@ -12,5 +12,11 @@
         <input  name="image" type="file">
         <input value="送信" type="submit"> 
         </form>
+
+        <form action="/post" method="POST">
+            {%csrf_token%}
+            {{form}}
+            <button type="submit">送信</button>
+        </form>
     </body>
 </html>
